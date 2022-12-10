@@ -1,29 +1,35 @@
 package SimpleAndCompund;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 public class SimpleInterest {
 	
 	Scanner input = new Scanner(System.in);
-	
 	public float interest;
 	float principal;
 	protected float rate;
 	protected float time;
 	protected float futureValue;
-	int option;
+	int choice;
+	int timeOption;
 	
 	public static float convertToDecimal(float rate) {
 		return rate / 100;
 	}
 	
-	public float getInterestOption(int option){
-		this.option = option;
-		if (option == 1) return getInterest();
-		else if (option == 2)return getOrdinaryInterest();
-		else if (option == 3) return getExactInterest();
-		return 0;
+	public float getInterestAnswer(int choice){
+		this.choice = choice;
+		float storeAnswer = 0;
+		if (choice == 1) return storeAnswer = getInterest();
+		else if (choice == 2) return storeAnswer = getMonths();
+		else if (choice == 3) return storeAnswer = getOrdinaryInterest();
+		else if (choice == 4) return storeAnswer = getExactInterest();
+		return storeAnswer;
 	}
 	public float getInterest() {
 		return principal * convertToDecimal(rate) * time;
+	}
+	public float getMonths() {
+		return principal * convertToDecimal(rate) * time/12;
 	}
 	public float getExactInterest() {
 		return principal * convertToDecimal(rate) * time/365;
@@ -31,10 +37,6 @@ public class SimpleInterest {
 	public float getOrdinaryInterest() {
 		return principal * convertToDecimal(rate) * time/360;
 	}
-	public float getFutureValueInterest() {
-		return principal + getInterestOption(option);
-	}
-	
 	public float getPrincipal() {
 		return interest / (convertToDecimal(rate) * time);
 	}
@@ -44,8 +46,9 @@ public class SimpleInterest {
 	public float getTime() {
 		return interest / (principal * convertToDecimal(rate));
 	}
+	
 	public void checkFutureOption(int option) {
-		this.option = option;
+		this.choice = option;
 		if (option == 1) {
 			System.out.print("Enter Principal : ");
 			principal = input.nextFloat();
@@ -70,20 +73,22 @@ public class SimpleInterest {
 		}else System.out.println("Invalid Input.");
 	}
 	public float getFutureValue(int option) {
-		this.option = option;
+		this.choice = option;
+		float amount = 0;
 		if (option == 1 ) {
-			return principal + interest;
+			amount = principal + interest;
 		}else if (option == 2) {
-			return principal + (principal * convertToDecimal(rate) * time);
+			amount =  principal + (principal * convertToDecimal(rate) * time);
 		}else if (option == 3) {
-			return principal * (1 * (convertToDecimal(rate) * time));
+			amount =  principal * (1 * (convertToDecimal(rate) * time));
 		}
-			return 1;
+			return amount;
 	}
 	public void displayInterestChoice() {
 		System.out.println("Press 1 Normal Interest");
-		System.out.println("Press 2 Exact Interest");
-		System.out.println("Press 3 Ordinary Interest");
+		System.out.println("Press 2 Months Interest");
+		System.out.println("Press 3 Exact Interest");
+		System.out.println("Press 4 Ordinary Interest");
 		System.out.print("Option : ");
 	}
 	public void displayInterestSolution() {
@@ -107,7 +112,7 @@ public class SimpleInterest {
 		System.out.println("Rate      : " + "Rate      : " + rate +" or " + SimpleInterest.convertToDecimal(rate));
 	}
 	public void displayFutureSolution(int option) {
-		this.option = option;
+		this.choice = option;
 		if (option == 1) {
 			System.out.println("Principal : " + principal);
 			System.out.println("Interest  : " + interest);
@@ -123,12 +128,12 @@ public class SimpleInterest {
 	}
 	
 	public static void displayChart() {
-		System.out.println("\t\tSimple Interest Calculator");
-		System.out.println("1. Find Simple Interest");
-		System.out.println("2. Find Principal");
-		System.out.println("3. Find Rate");
-		System.out.println("4. Find Time");
-		System.out.println("5. Find Future Value");
+		System.out.println("\n\tSimple Interest Calculator");
+		System.out.println("[1] Find Simple Interest");
+		System.out.println("[2] Find Principal");
+		System.out.println("[3] Find Rate");
+		System.out.println("[4] Find Time");
+		System.out.println("[5] Find Future Value");
 		System.out.print("\nEnter Your Choice : ");
 	}
 	public static void displayInterestFormula() {
@@ -149,10 +154,10 @@ public class SimpleInterest {
 	}
 	public static void displayFutureFormula() {
 		System.out.println("Future Value Formula");
-		System.out.println("1. F = P + I ");
-		System.out.println("2. F = P + (prt)");
-		System.out.println("3. F = P (1 + rt)");
-		System.out.print("Enter Option : ");
+		System.out.println("[1] F = P + I ");
+		System.out.println("[2] F = P + (prt)");
+		System.out.println("[3] F = P (1 + rt)");
+		System.out.print("Enter Choice : ");
 	}
 	
 }

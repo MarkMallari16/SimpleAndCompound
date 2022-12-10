@@ -2,30 +2,35 @@ package SimpleAndCompund;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-
 public class Calculator {
 	
 	public static void main(String[] args) {
 		
-		
-		
-		displaySimpleInterestCalculator();
-		
-		
+		Scanner inputChoice = new Scanner(System.in);
+		int choice = 0;
+	
+		//display the calculator
+		displayCalculatorChoice();
+		System.out.print("Enter Your Choice : ");
+		choice  = inputChoice.nextInt();
+		while (choice < 0 || choice > 5) {
+			System.out.println("Must be range 1-2 Try Again : ");
+			choice = inputChoice.nextInt();
+		}
+		checkCalculatorChoice(choice);
 		
 	}
 		public static void displaySimpleInterestCalculator() {
 			DecimalFormat twoDecimal = new DecimalFormat("0.00");
 			
 			SimpleInterest si = new SimpleInterest();
-			Scanner input = new Scanner(System.in);
+			Scanner simpleInput = new Scanner(System.in);
 			SimpleInterest.displayChart();
 			int futureOption;
-			int choice = input.nextInt();
+			int choice = simpleInput.nextInt();
 			while (choice < 1 || choice > 5) {
 				System.out.print("Invalid Input. \nMust Be range 1 - 5 Try Again : ");
-				choice = input.nextInt();
-				divideDash();
+				choice = simpleInput.nextInt();
 			}
 			switch (choice) {
 			//find simple interest
@@ -35,21 +40,19 @@ public class Calculator {
 				SimpleInterest.displayInterestFormula();
 				divideDash();
 				System.out.print("Enter Principal Value : ");
-				si.principal = input.nextFloat();
+				si.principal = simpleInput.nextFloat();
 				System.out.print("Enter Rate : ");
-				si.rate = input.nextFloat();
+				si.rate = simpleInput.nextFloat();
 				System.out.print("Enter Time : ");
-				si.time = input.nextInt();
-				
+				si.time = simpleInput.nextInt();
 				divideDash();
 				si.displayInterestChoice();
-				interestOption = input.nextInt();
-				si.getInterestOption(interestOption);
+				interestOption = simpleInput.nextInt();
 				divideDash();
 				si.displayInterestSolution();
 				divideDash();
 				//result
-				System.out.println("Interest : " + twoDecimal.format(si.getInterestOption(interestOption)));
+				System.out.println("Interest : " + twoDecimal.format(si.getInterestAnswer(interestOption)));
 				divideDash();
 				break;
 				
@@ -59,11 +62,11 @@ public class Calculator {
 				SimpleInterest.displayPrincipalFormula();
 				divideDash();
 				System.out.print("Enter Simple Interest Value : ");
-				si.interest = input.nextFloat();
+				si.interest = simpleInput.nextFloat();
 				System.out.print("Enter Rate Value : ");
-				si.rate = input.nextFloat();
+				si.rate = simpleInput.nextFloat();
 				System.out.print("Enter Time : ");
-				si.time = input.nextFloat();
+				si.time = simpleInput.nextFloat();
 				divideDash();
 				si.displayPrincipalSolution();
 				divideDash();
@@ -77,17 +80,17 @@ public class Calculator {
 				SimpleInterest.displayRateFormula();
 				divideDash();
 				System.out.print("Enter Interest Value : ");
-				si.interest = input.nextFloat();
+				si.interest = simpleInput.nextFloat();
 				System.out.print("Enter Principal Value : ");
-				si.principal = input.nextFloat();
+				si.principal = simpleInput.nextFloat();
 				System.out.print("Enter Time : ");
-				si.time = input.nextFloat();
+				si.time = simpleInput.nextFloat();
 				divideDash();
 				si.displayRateSolution();
 				divideDash();
 				
 				//rate result
-				System.out.println("Rate : " + (int)si.getRate()+"%");
+				System.out.println("Rate : " +  " convert to "+ (int)si.getRate() + "%");
 				break;
 			//find time
 			case 4:
@@ -95,11 +98,11 @@ public class Calculator {
 				SimpleInterest.displayTimeFormula();
 				divideDash();
 				System.out.print("Enter Interest Value : ");
-				si.interest = input.nextFloat();
+				si.interest = simpleInput.nextFloat();
 				System.out.print("Enter Principal Value : ");
-				si.principal = input.nextFloat();
+				si.principal = simpleInput.nextFloat();
 				System.out.print("Enter Rate : ");
-				si.rate = input.nextFloat();
+				si.rate = simpleInput.nextFloat();
 				divideDash();
 				si.displayTimeSolution();
 				divideDash();
@@ -111,7 +114,7 @@ public class Calculator {
 			case 5:
 				divideDash();
 				SimpleInterest.displayFutureFormula();
-				futureOption = input.nextInt();
+				futureOption = simpleInput.nextInt();
 				divideDash();
 				si.checkFutureOption(futureOption);
 				divideDash();
@@ -123,7 +126,124 @@ public class Calculator {
 				break;
 			}
 		}
-		public static void divideDash() {
+	public static void displayCompoundCalculator() {
+			DecimalFormat twoDecimal = new DecimalFormat("0.00");
+			Scanner compoundInput = new Scanner(System.in);
+			CompoundInterest ci = new CompoundInterest();
+			int choice = 0;
+			int periodOption = 0;
+			CompoundInterest.displayCompoundChart();
+			choice = compoundInput.nextInt();
+			switch(choice) {
+				case 1:
+					
+					divideDash();
+					CompoundInterest.displayCompoundAmountFormula();
+					divideDash();
+					System.out.print("Enter Principal : ");
+					ci.principal = compoundInput.nextFloat();
+					System.out.print("Enter Rate      : ");
+					ci.rate = compoundInput.nextFloat();
+					System.out.print("Enter Time      : ");
+					ci.time = compoundInput.nextFloat();
+					divideDash();
+					CompoundInterest.displayCompoundingPeriods();
+					periodOption = compoundInput.nextInt();
+					while (periodOption < 1 || periodOption > 4) {
+						System.out.print("Invalid Input period range 1 - 4 \nTry Again : ");
+						periodOption = compoundInput.nextInt();
+					}
+					CompoundInterest.getPeriodPerYear(periodOption);
+					divideDash();
+					ci.displayCompoundAmountSolution();
+					divideDash();
+					//compound amount answer
+					System.out.println("Compound Amount : " + twoDecimal.format(ci.getCompoundAmount()));
+					break;
+				case 2:
+					divideDash();
+					CompoundInterest.displayInterestFormula();
+					divideDash();
+					System.out.print("Enter Compound Amount / Future Value : ");
+					ci.futureValue = compoundInput.nextFloat();
+					System.out.print("Enter Principal                      : ");
+					ci.principal = compoundInput.nextFloat();
+					divideDash();
+					//compound interest answer
+					System.out.println("Compound Interest : " + twoDecimal.format(ci.getInterest()));
+					break;
+				case 3:
+					divideDash();
+					CompoundInterest.displayPrincipalFormula();
+					divideDash();
+					System.out.print("Enter Compound Amount / Future Value : ");
+					ci.futureValue = compoundInput.nextFloat();
+					System.out.print("Enter Rate                           : ");
+					ci.rate = compoundInput.nextFloat();
+					System.out.println("Enter Time                           : ");
+					ci.time = compoundInput.nextFloat();
+					divideDash();
+					CompoundInterest.displayCompoundingPeriods();
+					periodOption = compoundInput.nextInt();
+					CompoundInterest.getPeriodPerYear(periodOption);
+					divideDash();
+					ci.displayPrincipalSolution();
+					divideDash();
+					//principal answer
+					System.out.println("Principal : " + twoDecimal.format(ci.getPrincipal()));
+					break;
+				case 4: 
+					divideDash();
+					CompoundInterest.displayRateFormula();
+					divideDash();
+					System.out.print("Enter Compound Amount / Future Value : ");
+					ci.futureValue = compoundInput.nextFloat();
+					System.out.print("Enter Principal                      : ");
+					ci.principal = compoundInput.nextFloat();
+					System.out.print("Enter Time                           : ");
+					ci.time = compoundInput.nextFloat();
+					divideDash();
+					CompoundInterest.displayCompoundingPeriods();
+					periodOption = compoundInput.nextInt();
+					CompoundInterest.getPeriodPerYear(periodOption);
+					divideDash();
+					ci.displayRateSolution();
+					divideDash();
+					//rate answer
+					System.out.println("Rate : " + twoDecimal.format(ci.getRate()));
+					System.out.println("Rate : " + twoDecimal.format(ci.convertRate()) + "%");
+					break;
+				case 5:
+					divideDash();
+					CompoundInterest.displayTimeFormula();
+					divideDash();
+					System.out.print("Enter Compound Amount / Future Value : ");
+					ci.futureValue = compoundInput.nextFloat();
+					System.out.print("Enter Principal                      : ");
+					ci.principal = compoundInput.nextFloat();
+					System.out.print("Enter Rate                           : ");
+					ci.rate = compoundInput.nextFloat();
+					divideDash();
+					CompoundInterest.displayCompoundingPeriods();
+					periodOption = compoundInput.nextInt();
+					CompoundInterest.getPeriodPerYear(periodOption);
+					divideDash();
+					ci.displayTimeSolution();
+					divideDash();
+					//time answer
+					System.out.println("Time : " + twoDecimal.format(ci.getTime()));
+					System.out.println("Time : " + twoDecimal.format(ci.getTime()) + " years");
+			}
+		}
+	public static void displayCalculatorChoice() {
+			System.out.println("[1] Simple Interest Calculator");
+			System.out.println("[2] Compound Interest Calculator");
+		}
+	public static void checkCalculatorChoice(int choice) {
+			if (choice == 1) displaySimpleInterestCalculator();
+			else if (choice == 2) displayCompoundCalculator();
+		}
+	public static void divideDash() {
 			System.out.println("-----------------------------------------------");
 		}
 }
