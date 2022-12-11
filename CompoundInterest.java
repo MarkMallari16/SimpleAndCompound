@@ -1,9 +1,12 @@
 package SimpleAndCompund;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CompoundInterest extends SimpleInterest{
-	static int period = 0;
 	Scanner input = new Scanner(System.in);
+	DecimalFormat two = new DecimalFormat("0.00");
+	static int period;
+	
 	public static void displayCompoundChart() {
 		System.out.println("\n\tCompound Interest Calculator");
 		System.out.println("[1] Find Compound Amount");
@@ -41,7 +44,6 @@ public class CompoundInterest extends SimpleInterest{
 		System.out.println("[4] Monthly         =          12");
 		System.out.print("Enter Your Choice : ");
 	}
-	
 	public static int getPeriodPerYear(int option) {
 		if (option == 1) {
 			period = 1;
@@ -54,9 +56,17 @@ public class CompoundInterest extends SimpleInterest{
 		}
 		return period;
 	}
+	public static int checkPeriod(int option) {
+		Scanner checkOption = new Scanner(System.in); 
+		while (option < 1 || option > 4) {
+			System.out.print("You must enter range 1 - 4 \nTry Again : ");
+			option = checkOption.nextInt();
+		}
+		return getPeriodPerYear(option);
+	}
 	public void displayCompoundAmountSolution() {
 		System.out.println("Principal : " + principal);
-		System.out.println("Rate      : " + rate + " or" + convertToDecimal(rate));
+		System.out.println("Rate      : " + two.format(rate) + " or" + two.format(convertToDecimal(rate)));
 		System.out.println("Time      : " + time);
 		System.out.println("Period    : " + period);
 	}
@@ -66,7 +76,7 @@ public class CompoundInterest extends SimpleInterest{
 	}
 	public void displayPrincipalSolution() {
 		System.out.println("Compound Amount / Future Value : " + futureValue);
-		System.out.println("Rate                           : " + rate + " or " + convertToDecimal(rate));
+		System.out.println("Rate                           : " + two.format(rate) + " or" + two.format(convertToDecimal(rate)));
 		System.out.println("Time                           : " + time);
 		System.out.println("Period                         : " + period);
 	}
@@ -79,6 +89,7 @@ public class CompoundInterest extends SimpleInterest{
 	public void displayTimeSolution() {
 		System.out.println("Compound Amount / Future Value : " + futureValue);
 		System.out.println("Principal                      : " + principal);
+		System.out.println("Rate      : " + two.format(rate) + " or" + two.format(convertToDecimal(rate)));
 		System.out.println("Period                         : " + period);
 	}
 	

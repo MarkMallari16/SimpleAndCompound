@@ -6,22 +6,37 @@ public class Calculator {
 	
 	public static void main(String[] args) {
 		
-		Scanner inputChoice = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);
+		char again = 0;
+		do {
 		int choice = 0;
 	
 		//display the calculator
 		displayCalculatorChoice();
 		System.out.print("Enter Your Choice : ");
-		choice  = inputChoice.nextInt();
-		while (choice < 0 || choice > 5) {
-			System.out.println("Must be range 1-2 Try Again : ");
-			choice = inputChoice.nextInt();
+		choice = input.nextInt();
+		while (choice < 1 || choice > 2) {
+			System.out.print("Must be range 1 - 2 Try Again : ");
+			choice = input.nextInt();
 		}
 		checkCalculatorChoice(choice);
-		
+			
+			//ask user to try again
+			System.out.print("\nDo you want to Calculate any Program? [Y][N] : ");
+			again = input.next().charAt(0);
+			System.out.println();
+			divideDash();
+		}while(again == 'y' || again == 'Y');
+			divideDash();
+			System.out.println("Thank You For Using  My Calculator :)");
+			input.close();
+			divideDash();
 	}
+	
+	
 		public static void displaySimpleInterestCalculator() {
 			DecimalFormat twoDecimal = new DecimalFormat("0.00");
+			
 			
 			SimpleInterest si = new SimpleInterest();
 			Scanner simpleInput = new Scanner(System.in);
@@ -41,9 +56,9 @@ public class Calculator {
 				divideDash();
 				System.out.print("Enter Principal Value : ");
 				si.principal = simpleInput.nextFloat();
-				System.out.print("Enter Rate : ");
+				System.out.print("Enter Rate            : ");
 				si.rate = simpleInput.nextFloat();
-				System.out.print("Enter Time : ");
+				System.out.print("Enter Time            : ");
 				si.time = simpleInput.nextInt();
 				divideDash();
 				si.displayInterestChoice();
@@ -63,34 +78,34 @@ public class Calculator {
 				divideDash();
 				System.out.print("Enter Simple Interest Value : ");
 				si.interest = simpleInput.nextFloat();
-				System.out.print("Enter Rate Value : ");
+				System.out.print("Enter Rate Value            : ");
 				si.rate = simpleInput.nextFloat();
-				System.out.print("Enter Time : ");
+				System.out.print("Enter Time                  : ");
 				si.time = simpleInput.nextFloat();
 				divideDash();
 				si.displayPrincipalSolution();
 				divideDash();
 				
 				//principal result
-				System.out.println("Principal is : " + si.getPrincipal());
+				System.out.println("Principal : " + si.getPrincipal());
 				break;
 			//find rate
 			case 3:
 				divideDash();
 				SimpleInterest.displayRateFormula();
 				divideDash();
-				System.out.print("Enter Interest Value : ");
+				System.out.print("Enter Interest Value  : ");
 				si.interest = simpleInput.nextFloat();
 				System.out.print("Enter Principal Value : ");
 				si.principal = simpleInput.nextFloat();
-				System.out.print("Enter Time : ");
+				System.out.print("Enter Time            : ");
 				si.time = simpleInput.nextFloat();
 				divideDash();
 				si.displayRateSolution();
 				divideDash();
 				
 				//rate result
-				System.out.println("Rate : " +  " convert to "+ (int)si.getRate() + "%");
+				System.out.println("Rate : " +  si.rate + " convert to "+ si.getRate() + "%");
 				break;
 			//find time
 			case 4:
@@ -134,9 +149,12 @@ public class Calculator {
 			int periodOption = 0;
 			CompoundInterest.displayCompoundChart();
 			choice = compoundInput.nextInt();
+			while (choice < 1 || choice > 5) {
+				System.out.print("Invalid Input. \nMust Be range 1 - 5 Try Again : ");
+				choice = compoundInput.nextInt();
+			}
 			switch(choice) {
 				case 1:
-					
 					divideDash();
 					CompoundInterest.displayCompoundAmountFormula();
 					divideDash();
@@ -149,16 +167,14 @@ public class Calculator {
 					divideDash();
 					CompoundInterest.displayCompoundingPeriods();
 					periodOption = compoundInput.nextInt();
-					while (periodOption < 1 || periodOption > 4) {
-						System.out.print("Invalid Input period range 1 - 4 \nTry Again : ");
-						periodOption = compoundInput.nextInt();
-					}
+					CompoundInterest.checkPeriod(periodOption);
 					CompoundInterest.getPeriodPerYear(periodOption);
 					divideDash();
 					ci.displayCompoundAmountSolution();
 					divideDash();
 					//compound amount answer
 					System.out.println("Compound Amount : " + twoDecimal.format(ci.getCompoundAmount()));
+					divideDash();
 					break;
 				case 2:
 					divideDash();
@@ -171,6 +187,7 @@ public class Calculator {
 					divideDash();
 					//compound interest answer
 					System.out.println("Compound Interest : " + twoDecimal.format(ci.getInterest()));
+					divideDash();
 					break;
 				case 3:
 					divideDash();
@@ -180,17 +197,19 @@ public class Calculator {
 					ci.futureValue = compoundInput.nextFloat();
 					System.out.print("Enter Rate                           : ");
 					ci.rate = compoundInput.nextFloat();
-					System.out.println("Enter Time                           : ");
+					System.out.print("Enter Time                           : ");
 					ci.time = compoundInput.nextFloat();
 					divideDash();
 					CompoundInterest.displayCompoundingPeriods();
 					periodOption = compoundInput.nextInt();
+					CompoundInterest.checkPeriod(periodOption);
 					CompoundInterest.getPeriodPerYear(periodOption);
 					divideDash();
 					ci.displayPrincipalSolution();
 					divideDash();
 					//principal answer
 					System.out.println("Principal : " + twoDecimal.format(ci.getPrincipal()));
+					divideDash();
 					break;
 				case 4: 
 					divideDash();
@@ -226,6 +245,7 @@ public class Calculator {
 					divideDash();
 					CompoundInterest.displayCompoundingPeriods();
 					periodOption = compoundInput.nextInt();
+					CompoundInterest.checkPeriod(periodOption);
 					CompoundInterest.getPeriodPerYear(periodOption);
 					divideDash();
 					ci.displayTimeSolution();
@@ -233,17 +253,21 @@ public class Calculator {
 					//time answer
 					System.out.println("Time : " + twoDecimal.format(ci.getTime()));
 					System.out.println("Time : " + twoDecimal.format(ci.getTime()) + " years");
+					divideDash();
 			}
 		}
-	public static void displayCalculatorChoice() {
-			System.out.println("[1] Simple Interest Calculator");
-			System.out.println("[2] Compound Interest Calculator");
-		}
-	public static void checkCalculatorChoice(int choice) {
-			if (choice == 1) displaySimpleInterestCalculator();
-			else if (choice == 2) displayCompoundCalculator();
-		}
-	public static void divideDash() {
-			System.out.println("-----------------------------------------------");
-		}
+		
+		public static void displayCalculatorChoice() {
+				divideDash();
+				System.out.println("[1] Simple Interest Calculator");
+				System.out.println("[2] Compound Interest Calculator");
+				divideDash();
+			}
+		public static void checkCalculatorChoice(int choice) {
+				if (choice == 1) displaySimpleInterestCalculator();
+				else if (choice == 2) displayCompoundCalculator();
+			}
+		public static void divideDash() {
+				System.out.println("-----------------------------------------------");
+			}
 }

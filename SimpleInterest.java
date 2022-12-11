@@ -9,20 +9,20 @@ public class SimpleInterest {
 	protected float rate;
 	protected float time;
 	protected float futureValue;
-	int choice;
+	int option;
 	int timeOption;
 	
 	public static float convertToDecimal(float rate) {
 		return rate / 100;
 	}
 	
-	public float getInterestAnswer(int choice){
-		this.choice = choice;
+	public float getInterestAnswer(int option){
+		this.option = option;
 		float storeAnswer = 0;
-		if (choice == 1) return storeAnswer = getInterest();
-		else if (choice == 2) return storeAnswer = getMonths();
-		else if (choice == 3) return storeAnswer = getOrdinaryInterest();
-		else if (choice == 4) return storeAnswer = getExactInterest();
+		if (option == 1) return storeAnswer = getInterest();
+		else if (option == 2) return storeAnswer = getMonths();
+		else if (option == 3) return storeAnswer = getOrdinaryInterest();
+		else if (option == 4) return storeAnswer = getExactInterest();
 		return storeAnswer;
 	}
 	public float getInterest() {
@@ -48,7 +48,7 @@ public class SimpleInterest {
 	}
 	
 	public void checkFutureOption(int option) {
-		this.choice = option;
+		this.option = option;
 		if (option == 1) {
 			System.out.print("Enter Principal : ");
 			principal = input.nextFloat();
@@ -73,7 +73,7 @@ public class SimpleInterest {
 		}else System.out.println("Invalid Input.");
 	}
 	public float getFutureValue(int option) {
-		this.choice = option;
+		this.option = option;
 		float amount = 0;
 		if (option == 1 ) {
 			amount = principal + interest;
@@ -112,7 +112,7 @@ public class SimpleInterest {
 		System.out.println("Rate      : " + "Rate      : " + rate +" or " + SimpleInterest.convertToDecimal(rate));
 	}
 	public void displayFutureSolution(int option) {
-		this.choice = option;
+		this.option = option;
 		if (option == 1) {
 			System.out.println("Principal : " + principal);
 			System.out.println("Interest  : " + interest);
@@ -126,7 +126,6 @@ public class SimpleInterest {
 			System.out.println("Time      : " + time);
 		}
 	}
-	
 	public static void displayChart() {
 		System.out.println("\n\tSimple Interest Calculator");
 		System.out.println("[1] Find Simple Interest");
