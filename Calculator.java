@@ -1,5 +1,6 @@
 package SimpleAndCompund;
 import java.text.DecimalFormat;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Calculator {
@@ -13,7 +14,7 @@ public class Calculator {
 	
 		//display the calculator
 		displayCalculatorChoice();
-		System.out.print("Enter Your Choice : ");
+		System.out.print("\t\tEnter Your Choice : ");
 		choice = input.nextInt();
 		divideDash();
 		while (choice < 1 || choice > 2) {
@@ -29,16 +30,15 @@ public class Calculator {
 			
 		}while(again == 'y' || again == 'Y');
 			divideDash();
-			System.out.println("\tThank You For Using  My Calculator :)");
-			input.close();
+			System.out.println("\t\tThank You For Using  My Calculator :)");
 			divideDash();
+			input.close();
 	}
 	
 	
 		public static void displaySimpleInterestCalculator() {
 			DecimalFormat twoDecimal = new DecimalFormat("0.00");
 			DecimalFormat sixDecimal = new DecimalFormat("0.000000");
-			
 			SimpleInterest si = new SimpleInterest();
 			Scanner simpleInput = new Scanner(System.in);
 			
@@ -58,7 +58,7 @@ public class Calculator {
 				divideDash();
 				SimpleInterest.displayInterestFormula();
 				divideDash();
-				System.out.print("Enter Principal Value : ");
+				System.out.print("Enter Principal Value  : ");
 				si.principal = simpleInput.nextFloat();
 				System.out.print("Enter Rate            : ");
 				si.rate = simpleInput.nextFloat();
@@ -112,7 +112,8 @@ public class Calculator {
 				
 				//rate result
 				System.out.println("Rate : " +  si.getRate());
-				System.out.println("Rate : " + twoDecimal.format( si.convertToPercent()) + " %");
+				System.out.println("Rate : " + twoDecimal.format( si.convertToPercent()) + "%");
+				divideDash();
 				break;
 			//find time
 			case 4:
@@ -130,7 +131,7 @@ public class Calculator {
 				divideDash();
 				//time result
 				System.out.println("Time : " + sixDecimal.format(si.getTime()));
-				System.out.println("Time : "+ twoDecimal.format(si.getTime()));
+				System.out.println("Time : "+ twoDecimal.format(si.getTime() + " year/s"));
 				divideDash();
 				break;
 			//find future value
@@ -147,7 +148,8 @@ public class Calculator {
 				System.out.println("Future Value : " + sixDecimal.format(si.getFutureValue(futureOption)));
 				System.out.println("Future Value : " + twoDecimal.format(si.getFutureValue(futureOption)));
 				divideDash();
-				break;
+				simpleInput.close();
+				
 			}
 		}
 	public static void displayCompoundCalculator() {
@@ -237,6 +239,8 @@ public class Calculator {
 					ci.futureValue = compoundInput.nextFloat();
 					System.out.print("Enter Principal                      : ");
 					ci.principal = compoundInput.nextFloat();
+					//check if future value is less than principal
+					ci.checkFutureAndPrincipal();
 					System.out.print("Enter Time                           : ");
 					ci.time = compoundInput.nextFloat();
 					divideDash();
@@ -247,8 +251,9 @@ public class Calculator {
 					ci.displayRateSolution();
 					divideDash();
 					//rate answer
-					System.out.println("Rate : " + twoDecimal.format(ci.getRate()));
-					System.out.println("Rate : " + twoDecimal.format(ci.convertToPercent()) + " %");
+					System.out.println("Rate : " + sixDecimal.format(ci.getRate()));
+					System.out.println("Rate : " + twoDecimal.format(ci.convertToPercent()) + "%");
+					divideDash();
 					break;
 				//find time
 				case 5:
@@ -257,8 +262,13 @@ public class Calculator {
 					divideDash();
 					System.out.print("Enter Compound Amount / Future Value : ");
 					ci.futureValue = compoundInput.nextFloat();
+					
 					System.out.print("Enter Principal                      : ");
 					ci.principal = compoundInput.nextFloat();
+					
+					//check if future value is less than principal
+					ci.checkFutureAndPrincipal();
+					
 					System.out.print("Enter Rate                           : ");
 					ci.rate = compoundInput.nextFloat();
 					divideDash();
@@ -270,16 +280,22 @@ public class Calculator {
 					ci.displayTimeSolution();
 					divideDash();
 					//time answer
-					System.out.println("Time : " + sixDecimal.format(ci.getTime()));
-					System.out.println("Time : " + twoDecimal.format(ci.getTime()) + " years");
+					if (ci.futureValue <= ci.principal) {
+						throw new NoSuchElementException();
+						
+					}else {
+						System.out.println("Time : " + sixDecimal.format(ci.getTime()));
+						System.out.println("Time : " + twoDecimal.format(ci.getTime()) + " year/s");
+					}
 					divideDash();
+					
 			}
 		}
 		
 		public static void displayCalculatorChoice() {
 				divideDash();
-				System.out.println("[1] Simple Interest Calculator");
-				System.out.println("[2] Compound Interest Calculator");
+				System.out.println("\t\t[1] Simple Interest Calculator");
+				System.out.println("\t\t[2] Compound Interest Calculator");
 				divideDash();
 			}
 		public static void checkCalculatorChoice(int choice) {
@@ -287,6 +303,6 @@ public class Calculator {
 				else if (choice == 2) displayCompoundCalculator();
 			}
 		public static void divideDash() {
-				System.out.println("-----------------------------------------------");
+				System.out.println("------------------------------------------------------------------------");
 			}
 }

@@ -8,7 +8,7 @@ public class CompoundInterest extends SimpleInterest{
 	static int period;
 	
 	public static void displayCompoundChart() {
-		System.out.println("\n\tCompound Interest Calculator");
+		System.out.println("\n\t\tCompound Interest Calculator");
 		System.out.println("[1] Find Compound Amount");
 		System.out.println("[2] Find Compound Interest");
 		System.out.println("[3] Find Principal");
@@ -38,12 +38,12 @@ public class CompoundInterest extends SimpleInterest{
 		System.out.println("Formula : ln(A/P) / n[ln(1 + r / n)]\n");
 	}
 	public static void displayCompoundingPeriods() {
-		System.out.println("\tCompounding Periods Per Year");
-		System.out.println("[1] Annually        =          1");
-		System.out.println("[2] Semi Annually   =          2");
-		System.out.println("[3] Quarterly       =          4");
-		System.out.println("[4] Monthly         =          12");
-		System.out.print("Enter Your Choice : ");
+		System.out.println("\t\tCompounding Periods Per Year");
+		System.out.println("\t[1] Annually        =          1");
+		System.out.println("\t[2] Semi Annually   =          2");
+		System.out.println("\t[3] Quarterly       =          4");
+		System.out.println("\t[4] Monthly         =          12");
+		System.out.print("\tEnter Your Choice : ");
 	}
 	public static int getPeriodPerYear(int option) {
 		if (option == 1) {
@@ -60,10 +60,11 @@ public class CompoundInterest extends SimpleInterest{
 	public static int checkPeriod(int option) {
 		Scanner checkOption = new Scanner(System.in); 
 		while (option < 1 || option > 4) {
-			System.out.print("You must enter range 1 - 4 \nTry Again : ");
+			System.out.print("\tYou must enter range 1 - 4 \n\tTry Again : ");
 			option = checkOption.nextInt();
 		}
 		return getPeriodPerYear(option);
+			
 	}
 	public void displayCompoundAmountSolution() {
 		System.out.println("Principal : " + principal);
@@ -90,7 +91,7 @@ public class CompoundInterest extends SimpleInterest{
 	public void displayTimeSolution() {
 		System.out.println("Compound Amount / Future Value : " + futureValue);
 		System.out.println("Principal                      : " + principal);
-		System.out.println("Rate                           : " + two.format(rate) + " or" + two.format(convertRate(rate)));
+		System.out.println("Rate                           : " + two.format(rate) + " or " + two.format(convertRate(rate)));
 		System.out.println("Period                         : " + period);
 	}
 	
@@ -113,4 +114,15 @@ public class CompoundInterest extends SimpleInterest{
 	public float getTime() {
 		return (float)(Math.log(futureValue / principal) / (period * Math.log(1 + (convertRate(rate) / period))) );
 	}
+	public void checkFutureAndPrincipal() {
+		while (futureValue <= principal) {
+			System.out.print("Error Compound Amount should be greater than principal Try Again.\n");
+			System.out.print("Enter Compound Amount / Future Value : ");
+			futureValue = input.nextFloat();
+			
+			System.out.print("Enter Principal                      : ");
+			principal = input.nextFloat();
+		}
+	}
+	
 }

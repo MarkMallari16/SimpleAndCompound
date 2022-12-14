@@ -14,7 +14,7 @@ public class SimpleInterest {
 	int timeOption;
 	
 	public static void displayChart() {
-		System.out.println("\n\tSimple Interest Calculator");
+		System.out.println("\n\t\tSimple Interest Calculator");
 		System.out.println("[1] Find Simple Interest");
 		System.out.println("[2] Find Principal");
 		System.out.println("[3] Find Rate");
@@ -27,12 +27,12 @@ public class SimpleInterest {
 		System.out.println("Formula : I = P*r*t\n");
 	}
 	public void displayInterestChoice(int option) {
-		System.out.println("Press [1] Years Interest");
-		System.out.println("Press [2] Months Interest");
-		System.out.println("Press [3] Exact Interest");
-		System.out.println("Press [4] Ordinary Interest");
-		System.out.println("Press [5] Weekly Interest");
-		System.out.print("Option : ");
+		System.out.println("\tPress [1] Years Interest");
+		System.out.println("\tPress [2] Months Interest");
+		System.out.println("\tPress [3] Exact Interest");
+		System.out.println("\tPress [4] Ordinary Interest");
+		System.out.println("\tPress [5] Weekly Interest");
+		System.out.print("\tOption : ");
 	}
 	public float getInterestAnswer(int option){
 		this.option = option;
@@ -126,7 +126,7 @@ public class SimpleInterest {
 		return rate / 100;
 	}
 	public float convertToPercent() {
-		return getRate();
+		return getRate() * 100;
 	}
 	public float getTime() {
 		return interest / (principal * convertRate(rate));
