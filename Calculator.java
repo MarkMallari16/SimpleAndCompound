@@ -1,4 +1,4 @@
-package SimpleAndCompund;
+package simpleandcompound;
 import java.text.DecimalFormat;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -58,7 +58,7 @@ public class Calculator {
 				divideDash();
 				SimpleInterest.displayInterestFormula();
 				divideDash();
-				System.out.print("Enter Principal Value  : ");
+				System.out.print("Enter Principal Value : ");
 				si.principal = simpleInput.nextFloat();
 				System.out.print("Enter Rate            : ");
 				si.rate = simpleInput.nextFloat();

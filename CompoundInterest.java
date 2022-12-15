@@ -1,4 +1,4 @@
-package SimpleAndCompund;
+package simpleandcompound;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
