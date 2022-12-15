@@ -94,6 +94,7 @@ public class Calculator {
 				//principal result
 				System.out.println("Principal : " + sixDecimal.format(si.getPrincipal()));
 				System.out.println("Principal : " + twoDecimal.format(si.getPrincipal()));
+                                divideDash();
 				break;
 			//find rate
 			case 3:
@@ -246,6 +247,7 @@ public class Calculator {
 					divideDash();
 					CompoundInterest.displayCompoundingPeriods();
 					periodOption = compoundInput.nextInt();
+                                        CompoundInterest.checkPeriod(periodOption);
 					CompoundInterest.getPeriodPerYear(periodOption);
 					divideDash();
 					ci.displayRateSolution();

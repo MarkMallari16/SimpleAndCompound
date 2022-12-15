@@ -60,7 +60,7 @@ public class CompoundInterest extends SimpleInterest{
 	public static int checkPeriod(int option) {
 		Scanner checkOption = new Scanner(System.in); 
 		while (option < 1 || option > 4) {
-			System.out.print("\tYou must enter range 1 - 4 \n\tTry Again : ");
+			System.out.print("\tYou must enter the range of 1 - 4 \n\tTry Again : ");
 			option = checkOption.nextInt();
 		}
 		return getPeriodPerYear(option);
