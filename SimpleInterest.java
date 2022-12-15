@@ -1,4 +1,4 @@
-package simpleandcompound;
+package SimpleAndCompund;
 import java.util.Scanner;
 import java.text.DecimalFormat;
 public class SimpleInterest {
@@ -87,7 +87,6 @@ public class SimpleInterest {
 			System.out.println("Time      : " + time);
 		}
 	}
-	
 	public float getInterest() {
 		return principal * convertRate(rate) * time;
 	}
@@ -112,7 +111,6 @@ public class SimpleInterest {
 	public float getOrdinary() {
 		return time / 360;
 	}
-	
 	public float getWeekly() {
 		return time / 52;
 	}
@@ -131,13 +129,12 @@ public class SimpleInterest {
 	public float getTime() {
 		return interest / (principal * convertRate(rate));
 	}
-	
 	public void checkFutureOption(int option) {
 		this.option = option;
+		
 		if (option == 1) {
 			System.out.print("Enter Principal : ");
 			principal = input.nextFloat();
-			
 			System.out.print("Enter Interest  : ");
 			interest = input.nextFloat();
 			
@@ -155,11 +152,14 @@ public class SimpleInterest {
 			rate = input.nextFloat();
 			System.out.print("Enter Time      : ");
 			time = input.nextFloat();
-		}else System.out.println("Invalid Input.");
+		}else {
+			System.out.println("Invalid Input. Must be range of 1 - 3");
+		}
 	}
 	public float getFutureValue(int option) {
 		this.option = option;
 		float amount = 0;
+		
 		if (option == 1 ) {
 			amount = principal + interest;
 		}else if (option == 2) {
@@ -172,6 +172,7 @@ public class SimpleInterest {
 	
 	public void displayInterestSolution(int option) {
 		this.option = option;
+		
 		if (option == 1) {
 			System.out.println("Principal : " + principal);
 			System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
