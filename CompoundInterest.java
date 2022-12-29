@@ -2,7 +2,7 @@ package SimpleAndCompund;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class CompoundInterest extends SimpleInterest{
+class CompoundInterest extends SimpleInterest{
 	Scanner input = new Scanner(System.in);
 	DecimalFormat two = new DecimalFormat("0.00");
 	static int period;
@@ -18,24 +18,24 @@ public class CompoundInterest extends SimpleInterest{
 	}
 	
 	public static void displayCompoundAmountFormula() {
-		System.out.println("\nYou chose Compound Amount");
-		System.out.println("Formula : A = P (1 + r/n)^nt\n");
+		System.out.println("\n\t\tYou chose Compound Amount");
+		System.out.println("\t\tFormula : A = P (1 + r/n)^nt\n");
 	}
 	public static void displayInterestFormula() {
-		System.out.println("\nYou chose Compound Interest");
-		System.out.println("Formula : A - P\n");
+		System.out.println("\n\t\tYou chose Compound Interest");
+		System.out.println("\t\tFormula : A - P\n");
 	}
 	public static void displayPrincipalFormula() {
-		System.out.println("\nYou chose Principal");
-		System.out.println("Formula : A * (1 + r/n)^(-n * t)\n");
+		System.out.println("\n\t\tYou chose Principal");
+		System.out.println("\t\tFormula : A * (1 + r/n)^(-n * t)\n");
 	}
 	public static void displayRateFormula() {
 		System.out.println("\nYou chose Rate");
-		System.out.println("Formula : n [ (A / P)^1/nt -1 ]\n");
+		System.out.println("Formula : n [ (A / P)^1/nt - 1 ]\n");
 	}
 	public static void displayTimeFormula() {
-		System.out.println("\nYou chose Time");
-		System.out.println("Formula : ln(A/P) / n[ln(1 + r / n)]\n");
+		System.out.println("\n\t\tYou chose Time");
+		System.out.println("\t\tFormula : ln(A/P) / n[ln(1 + r / n)]\n");
 	}
 	public static void displayCompoundingPeriods() {
 		System.out.println("\t\tCompounding Periods Per Year");
@@ -60,7 +60,7 @@ public class CompoundInterest extends SimpleInterest{
 	public static int checkPeriod(int option) {
 		Scanner checkOption = new Scanner(System.in); 
 		while (option < 1 || option > 4) {
-			System.out.print("\tYou must enter range 1 - 4 \n\tTry Again : ");
+			System.out.print("\tInvalid Input. Must range from 1 to 4 Try Again : ");
 			option = checkOption.nextInt();
 		}
 		return getPeriodPerYear(option);
@@ -68,7 +68,7 @@ public class CompoundInterest extends SimpleInterest{
 	}
 	public void displayCompoundAmountSolution() {
 		System.out.println("Principal : " + principal);
-		System.out.println("Rate      : " + two.format(rate) + " or" + two.format(convertRate(rate)));
+		System.out.println("Rate      : " + two.format(rate) + " convert to decimal " + two.format(convertRate(rate)));
 		System.out.println("Time      : " + time);
 		System.out.println("Period    : " + period);
 	}
@@ -78,7 +78,7 @@ public class CompoundInterest extends SimpleInterest{
 	}
 	public void displayPrincipalSolution() {
 		System.out.println("Compound Amount / Future Value : " + futureValue);
-		System.out.println("Rate                           : " + two.format(rate) + " or" + two.format(convertRate(rate)));
+		System.out.println("Rate                           : " + two.format(rate) + " convert to decimal " + two.format(convertRate(rate)));
 		System.out.println("Time                           : " + time);
 		System.out.println("Period                         : " + period);
 	}
@@ -91,19 +91,19 @@ public class CompoundInterest extends SimpleInterest{
 	public void displayTimeSolution() {
 		System.out.println("Compound Amount / Future Value : " + futureValue);
 		System.out.println("Principal                      : " + principal);
-		System.out.println("Rate                           : " + two.format(rate) + " or " + two.format(convertRate(rate)));
+		System.out.println("Rate                           : " + two.format(rate) + " convert to decimal " + two.format(convertRate(rate)));
 		System.out.println("Period                         : " + period);
 	}
 	
 	public float getCompoundAmount() {
-		float amount = principal * (float)Math.pow(1 + convertRate(rate)/period, period*time);
+		float amount = principal * (float) Math.pow(1 + convertRate(rate)/period, period*time);
 		return amount;
 	}
 	public float getInterest() {
 		return futureValue - principal;
 	}
 	public float getPrincipal() {
-		return futureValue * (float)Math.pow( 1 + convertRate(rate) / period, -period * time);
+		return futureValue * (float) Math.pow( 1 + convertRate(rate) / period, -period * time);
 	}
 	public float getRate() {
 		return period * (float)(Math.pow(futureValue / principal, 1/(period * time)) -1);

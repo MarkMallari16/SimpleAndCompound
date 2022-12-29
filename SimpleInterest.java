@@ -23,8 +23,8 @@ public class SimpleInterest {
 		System.out.print("Option : ");
 	}
 	public static void displayInterestFormula() {
-		System.out.println("\nYou Chose Simple Interest");
-		System.out.println("Formula : I = P*r*t\n");
+		System.out.println("\n\t\tYou Chose Simple Interest");
+		System.out.println("\t\tFormula : I = P*r*t\n");
 	}
 	public void displayInterestChoice(int option) {
 		System.out.println("\tPress [1] Years Interest");
@@ -44,26 +44,26 @@ public class SimpleInterest {
 			return storeAnswer = getMonthsInterest();
 		}
 		else if (option == 3) {
-			return storeAnswer = getOrdinaryInterest();
+			return storeAnswer = getExactInterest();
 		}
 		else if (option == 4) {
-			return storeAnswer = getExactInterest();
+			return storeAnswer = getOrdinaryInterest();
 		}else if (option == 5) {
 			return storeAnswer = getWeeklyInterest();
 		}
 		return storeAnswer;
 	}
 	public static void displayPrincipalFormula() {
-		System.out.println("\nYou Chose Principal");
-		System.out.println("Formula : P = I / (r*t)\n");
+		System.out.println("\n\t\tYou Chose Principal");
+		System.out.println("\t\tFormula : P = I / (r*t)\n");
 	}
 	public static void displayRateFormula() {
-		System.out.println("\nYou Chose Rate");
-		System.out.println("Formula : r = I / (P * t)\n");
+		System.out.println("\n\t\tYou Chose Rate");
+		System.out.println("\t\tFormula : r = I / (P * t)\n");
 	}
 	public static void displayTimeFormula() {
-		System.out.println("\nYou Chose Time");
-		System.out.println("Formula : t = I / (P * r)\n");
+		System.out.println("\n\t\tYou Chose Time");
+		System.out.println("\t\tFormula : t = I / (P * r)\n");
 	}
 	public static void displayFutureFormula() {
 		System.out.println("Future Value Formula");
@@ -114,8 +114,21 @@ public class SimpleInterest {
 	public float getWeekly() {
 		return time / 52;
 	}
-	public float getPrincipal() {
-		return interest / (convertRate(rate) * time);
+	public float getPrincipalAnswer(int option) {
+		this.option = option;
+		float storeAnswer = 0;
+		if (option == 1) {
+			storeAnswer = interest / (1 + (convertRate(rate) * time));
+		}else if (option == 2) {
+			storeAnswer = interest / (1 + (convertRate(rate) * getMonth()));
+		}else if (option == 3) {
+			storeAnswer = interest / (1 + (convertRate(rate) * getExact()));
+		}else if (option == 4) {
+			storeAnswer = interest / (1 + (convertRate(rate) * getOrdinary()));
+		}else if (option == 5) {
+			storeAnswer = interest / (1 + (convertRate(rate) * getWeekly()));
+		}
+		return storeAnswer;
 	}
 	public float getRate() {
 		return interest / (principal * time);
@@ -130,8 +143,6 @@ public class SimpleInterest {
 		return interest / (principal * convertRate(rate));
 	}
 	public void checkFutureOption(int option) {
-		this.option = option;
-		
 		if (option == 1) {
 			System.out.print("Enter Principal : ");
 			principal = input.nextFloat();
@@ -152,12 +163,9 @@ public class SimpleInterest {
 			rate = input.nextFloat();
 			System.out.print("Enter Time      : ");
 			time = input.nextFloat();
-		}else {
-			System.out.println("Invalid Input. Must be range of 1 - 3");
 		}
 	}
 	public float getFutureValue(int option) {
-		this.option = option;
 		float amount = 0;
 		
 		if (option == 1 ) {
@@ -172,35 +180,69 @@ public class SimpleInterest {
 	
 	public void displayInterestSolution(int option) {
 		this.option = option;
-		
+		//years
 		if (option == 1) {
 			System.out.println("Principal : " + principal);
-			System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
 			System.out.println("Time      : " + time);
+		//months
 		}else if (option == 2) {
 			System.out.println("Principal : " + principal);
-			System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
-			System.out.println("Time      : " + getMonth());
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 12 months = " + sixDecimal.format(getMonth()));
+			System.out.println("Time      : " + sixDecimal.format(getMonth()));
+		//exact interest
 		}else if (option == 3) {
 			System.out.println("Principal : " + principal);
-			System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 365 days = " + sixDecimal.format(getExact()));
 			System.out.println("Time      : " + sixDecimal.format(getExact()));
+		//ordinary interest
 		}else if (option == 4) {
 			System.out.println("Principal : " + principal);
-			System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 360 days = " + sixDecimal.format(getOrdinary()));
 			System.out.println("Time      : " + sixDecimal.format(getOrdinary()));
-			
+		//weeks interest
 		}else if (option == 5){
 			System.out.println("Principal : " + principal);
-			System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 52 weeks = " + sixDecimal.format(getWeekly()));
 			System.out.println("Time      : " + sixDecimal.format(getWeekly()));
-		}else System.out.println("Invalid Input.");
-		
+		}
 	}
-	public void displayPrincipalSolution() {
-		System.out.println("Interest  : " + interest);
-		System.out.println("Rate      : " + rate + " or " + SimpleInterest.convertRate(rate));
-		System.out.println("Time      : " + time);
+	public void displayPrincipalSolution(int option) {
+		this.option = option;
+		//years
+		if (option == 1) {
+			System.out.println("Interest  : " + interest);
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Time      : " + time);
+		//months
+		}else if (option == 2) {
+			System.out.println("Interest  : " + interest);
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 12 months = " + sixDecimal.format(getMonth()));
+			System.out.println("Time      : " + sixDecimal.format(getMonth()));
+		//exact interest
+		}else if (option == 3) {
+			System.out.println("Interest  : " + interest);
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 365 days = " + sixDecimal.format(getExact()));
+			System.out.println("Time      : " + sixDecimal.format(getExact()));
+		//ordinary interest
+		}else if (option == 4) {
+			System.out.println("Interest  : " + interest);
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 360 days = " + sixDecimal.format(getOrdinary()));
+			System.out.println("Time      : " + sixDecimal.format(getOrdinary()));
+		//weeks interest
+		}else if (option == 5) {
+			System.out.println("Interest  : " + interest);
+			System.out.println("Rate      : " + rate + " converted into decimal " + SimpleInterest.convertRate(rate));
+			System.out.println("Convert time into years : " + time + " / " + " 52 weeks = " + sixDecimal.format(getWeekly()));
+			System.out.println("Time      : " + sixDecimal.format(getWeekly()));
+		}
 	}
 	public void displayRateSolution() {
 		System.out.println("Interest  : " + interest);
@@ -212,7 +254,4 @@ public class SimpleInterest {
 		System.out.println("Principal : " + principal);
 		System.out.println("Rate      : " + rate +" or " + SimpleInterest.convertRate(rate));
 	}
-	
-	
-	
 }
